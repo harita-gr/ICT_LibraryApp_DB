@@ -11,10 +11,13 @@ body {
   padding-top:50px;
   /* color:#646464;
   background-color:#efefef; */
+  background:url('/images/thumb-1920-26102.jpg');
+  background-size: cover;
 }
 
 h2,h3,.highlight,.navbar a,#masthead h4 {
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family:'Oswald',arial narrow,sans-serif;
   font-weight: bold;
   font-size: 20px;
 }
@@ -22,6 +25,7 @@ h2,h3,.highlight,.navbar a,#masthead h4 {
 #masthead h1{
   font-family: 'Bad Script', cursive;
 }
+
 
 footer {
 
@@ -35,7 +39,7 @@ footer {
 
 #masthead {
   min-height:199px;
-  background:url('/images/thumb-1920-26102.jpg');
+  /* background:url('/images/thumb-1920-26102.jpg'); */
   
   color:#aaaacc;
 }
@@ -129,6 +133,49 @@ a,a:hover {
 .panel {
   border-color:transparent;
   border-radius:0;
+  width:65vw;
+  margin: auto;
+}
+
+.panel-form {
+  border-color:transparent;
+  border-radius:0;
+  width:30vw;
+  height: 75vh;
+  margin: auto;
+  background-color: white;
+  box-shadow: 10px 10px black;
+}
+
+.panel-form2 {
+  border-color:transparent;
+  border-radius:0;
+  width:30vw;
+  height: 115vh;
+  margin: auto;
+  background-color: white;
+  box-shadow: 10px 10px black;
+}
+
+.panel-form3 {
+  border-color:transparent;
+  border-radius:0;
+  width:30vw;
+  height: 95vh;
+  margin: auto;
+  background-color: white;
+  box-shadow: 10px 10px black;
+}
+
+.panel-body-home img{
+   width: 30vw;
+   height:30vw;
+}
+.panel-body-home div.ad{
+  margin-left: 20px;
+}
+.panel-body-home{
+  display: flex;
 }
 
 .thumbnail {
@@ -155,6 +202,7 @@ a,a:hover {
 .panel .lead {
   overflow:hidden;
   height:90px;
+  
 }
 
 .label-float{
@@ -168,6 +216,17 @@ a,a:hover {
   color:#fff;
 }
     
+.col-sm-12 h1{
+  color:white;
+  font-family:'Oswald',arial narrow,sans-serif;
+}
+
+.panel h1,.panel-form h1, .panel-form2 h1, .panel-form3 h1{
+  text-align: center;
+  font-family: 'Bad Script', cursive;
+  /* font-family:'Oswald',arial narrow,sans-serif; */
+  color: rgb(82, 81, 81);
+}
 .btn-twitter {background-color:#4099FF;color:#fff;}
 .btn-facebook {background-color:#3B5998;color:#fff;}
 .btn-google-plus {background-color:#d34836;color:#fff;}
@@ -175,3 +234,41 @@ a,a:hover {
 .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
 .btn-facebook:hover {background-color:#2A4998;color:#4C6BBA;}
 .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
+
+/* Pagination links */
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: rgb(167, 99, 79);
+  color: white;
+}
+
+.pagination{
+  float: right;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.form-body form{
+  margin-left:2vw;
+  margin-right:2vw;
+}
+
+
+#err_email, #err_pass, #err_fn,  #err_pass2, #aname_err,#agenre_err,#abook_err,#aimg_err,#atitle_err{
+   font-size: x-small;
+   color: rgb(184, 44, 44);
+}
+
+.btn-dark{
+  background-color: black;
+  color: white;
+}

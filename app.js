@@ -5,7 +5,15 @@ const app = express();
 const port = process.env.PORT || 2000;
 
 //Reuse NavBar
+
+const index_nav =[
+    {link:'/index',name:'Home'},
+    {link:'/userlogin',name:'Sign In'},
+    {link:'/userRegister',name:'Sign Up'}
+];
+
 const nav = [
+    {link:'/home',name:'Home'},
     {link:'/books',name:'Books'},
     {link:'/authors',name:'Authors'},
     {link:'/addBook',name:'Add Book'},
@@ -13,133 +21,46 @@ const nav = [
     {link:'/logout',name:'Logout'}
 ];
 
+//Title Reuse
+const title = "Good Reads Library"
+
 //File Seperation
 
-const booksRouter = require('./src/routes/bookRoutes') (nav); //passing nav array to bookroutes.js
-const authorRouter = require('./src/routes/authorRoutes') (nav);
+const validateRouter = require('./src/routes/validateRoutes') (index_nav,title);
+const booksRouter = require('./src/routes/bookRoutes') (nav,title); //passing nav array to bookroutes.js
+const authorRouter = require('./src/routes/authorRoutes') (nav,title);
+const addAuthorRouter = require('./src/routes/addAuthorRoutes') (nav,title);
+const addBookRouter = require('./src/routes/addBookRoutes') (nav,title)
 // we can't use require for ejs
 
 app.use(express.static('./public'));
 app.set('view engine','ejs'); //set view engine
 app.set('views','./src/views'); //set ejs path
+
+app.use('/',validateRouter); // Index,SignIn,SignUp,Logout pages
 app.use('/books',booksRouter);
 app.use('/authors',authorRouter);
-
-//Router for Index page
-app.get('/',function(req,res){
-    // __dirname  gives current dir name
-    res.render("index",
-      {
-          nav:[
-              {link:'/userlogin',name:'Sign In'},
-              {link:'/userRegister',name:'Sign Up'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
-
-//LOGIN
-app.get('/userlogin',function(req,res){
-    res.render("login",
-      {
-          nav:[
-              {link:'/userlogin',name:'Sign In'},
-              {link:'/userRegister',name:'Sign Up'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
-
-//REGISTER
-app.get('/userRegister',function(req,res){
-    // __dirname  gives current dir name
-    res.render("signup",
-      {
-          nav:[
-              {link:'/userlogin',name:'Sign In'},
-              {link:'/userRegister',name:'Sign Up'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
+app.use('/addAuthor',addAuthorRouter);
+app.use('/addBook',addBookRouter);
 
 //HOME
+app.post('/home',function(req,res){
+    res.render("home",
+      {
+          nav,
+          title
+      }   
+    );
+});
+
 app.get('/home',function(req,res){
     res.render("home",
       {
-          nav:[
-              {link:'/books',name:'Books'},
-              {link:'/authors',name:'Authors'},
-              {link:'/addBook',name:'Add Book'},
-              {link:'/addAuthor',name:'Add Author'},
-              {link:'/logout',name:'Logout'}
-            ],
-          title: 'Library'
+          nav,
+          title
       }   
     );
 });
 
-//LOGOUT
-app.get('/logout',function(req,res){
-    res.render("logout",
-      {
-          nav:[
-            {link:'/userlogin',name:'Sign In'},
-            {link:'/userRegister',name:'Sign Up'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
-
-//AUTHORS
-
-app.get('/authors',function(req,res){
-    res.render("authors",
-      {
-          nav:[
-              {link:'/books',name:'Books'},
-              {link:'/authors',name:'Authors'},
-              {link:'/addBook',name:'Add Book'},
-              {link:'/addAuthor',name:'Add Author'},
-              {link:'/logout',name:'Logout'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
-
-app.get('/addAuthor',function(req,res){
-    res.render("addAuthor",
-      {
-          nav:[
-              {link:'/books',name:'Books'},
-              {link:'/authors',name:'Authors'},
-              {link:'/addBook',name:'Add Book'},
-              {link:'/addAuthor',name:'Add Author'},
-              {link:'/logout',name:'Logout'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
-
-app.get('/addBook',function(req,res){
-    res.render("addBook",
-      {
-          nav:[
-              {link:'/books',name:'Books'},
-              {link:'/authors',name:'Authors'},
-              {link:'/addBook',name:'Add Book'},
-              {link:'/addAuthor',name:'Add Author'},
-              {link:'/logout',name:'Logout'}
-            ],
-          title: 'Library'
-      }   
-    );
-});
 
 app.listen(port,()=> {console.log("Server Ready at "+port)});

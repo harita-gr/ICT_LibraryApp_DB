@@ -1,30 +1,30 @@
 const express = require('express');
 const authorRouter = express.Router();
 //write called function
-function router(nav){
+function router(nav,title){
 
 var authors = [
     {
         author: "J.R.R. Tolkien",
         genre: "Fantasy",
         books: ["The Lord of the Rings","The Hobbits"],
-        img: "tom.jpeg"
+        img: "tolkien.jpeg"
     },
     {
-        author: "Oscar Wilde",
-        genre: "Drama",
-        books: ["The Importance of Being Earnest","Lady Windermere's Fan"],
-        img: "tom.jpeg"
+        author: "J.K Rowling",
+        genre: "Fantasy",
+        books: ["Harry Potter","Fantastic Beasts and Where to Find them"],
+        img: "jk.jpeg"
     },
     {
         author: "James Clear",
         genre: "Self-Help",
         books: ["Atomic Habits"],
-        img: "tom.jpeg"
+        img: "clear.jpeg"
     }
     ]
 
-//Router for Books
+//Router for Authors
 authorRouter.get('/',function(req,res){
     res.render("authors",
     {
@@ -35,7 +35,7 @@ authorRouter.get('/',function(req,res){
     );
 });
 
-// for single book page
+// for single author page
 authorRouter.get('/:i',function(req,res){
    const id = req.params.i;
    res.render('author',{
@@ -44,6 +44,7 @@ authorRouter.get('/:i',function(req,res){
        author: authors[id]
    })
 });
+
      return authorRouter;
 }
 //acts as calling function as well

@@ -5,10 +5,10 @@ function router(nav){
 
 var books = [
     {
-        title: "Tom and Jerry",
-        author: "Joseph Barbara",
-        genre: "Cartoon",
-        img: "tom.jpeg"
+        title: "The Lord of the Rings",
+        author: "J.R.R. Tolkien",
+        genre: "Fantasy",
+        img: "lotr.jpeg"
     },
     {
         title: "Harry Potter",
@@ -17,10 +17,10 @@ var books = [
         img: "harry.jpg"
     },
     {
-        title: "Paathumayude Aadu",
-        author: "Basheer",
-        genre: "Drama",
-        img: "basheer.jpeg"
+        title: "Atomic Habits",
+        author: "James Clear",
+        genre: "Self-Help",
+        img: "at.jpeg"
     }
     ]
 
