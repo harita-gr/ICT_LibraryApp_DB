@@ -102,8 +102,14 @@
           
           <!--/stories-->
           
+          <%  if(admin) {%>
+            <a href="/adminhome/books" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>
+            <% } 
+             else{ %>
+              <a href="/books" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>
+            <% } %>
+
           
-          <a href="/books" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>
         
           
         </div>

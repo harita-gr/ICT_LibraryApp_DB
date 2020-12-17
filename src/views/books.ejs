@@ -9,6 +9,7 @@
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2a534a6860.js" crossorigin="anonymous"></script>
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -91,7 +92,14 @@
                 <div class="col-xs-9">
                   <h4><span class="label label-default"><%=books[i].author %></span></h4><h4>
                   <small style="font-family:courier,'new courier';" class="text-muted"><%=books[i].genre %> • 
+                    <%  if(admin) {%>
+                      <a href="/adminhome/books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
+                      <br> <br>
+                     <a href="/adminhome/updateBook/<%=books[i]._id%>"><i class="fas fa-edit"></i></a> &nbsp &nbsp 
+                     <a href="/adminhome/deleteBook/<%=books[i]._id%>"><i class="far fa-trash-alt"></i></a> 
+                     <% }  else { %>
                     <a href="/books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
+                    <% } %>
                   </h4></div>
                 <div class="col-xs-3"></div>
               </div>

@@ -77,6 +77,7 @@ function router(nav,title){
   
 });
 
+// Add Book Form
     adminRouter.get('/addBook',function(req,res){
         res.render("addBook",
           {
@@ -86,7 +87,7 @@ function router(nav,title){
         );
     });
 
-    
+// Add Book Action    
     adminRouter.get('/addB',function(req,res){
       var item = {
          title: req.query.title,
@@ -98,8 +99,60 @@ function router(nav,title){
         book.save(); //save to DB
         res.redirect('/adminhome/books');
       });
+// Update Book Form
+adminRouter.get('/updateBook/:i',function(req,res){
 
-    // AUTHOR
+  const id = req.params.i;
+  Bookdata.findOne({_id:id})
+  .then(function(book){
+   res.render('updateBook',{
+       nav,
+       title: 'Books',
+       book,
+       admin:true
+   });
+  });
+});
+
+// Update Book Action
+adminRouter.post('/updateB/:i',function(req,res){
+  console.log('UPDATING',req.body);
+  const id = req.params.i;
+  var update = Bookdata.findByIdAndUpdate(id,{
+       title:req.body.title,
+       genre:req.body.genre,
+       image: req.body.image,
+       author: req.body.author
+  });
+  update.exec(function (err,data){
+    if(err) throw err;
+    res.render("books",
+    {
+        nav,
+        title
+        // success : "Record Updated Successfully!",
+        
+    }   
+    );    
+  })
+});
+
+// Delete Book      
+
+adminRouter.get('/deleteBook/:i',function(req,res){
+  
+  const id = req.params.i;
+  var del = Bookdata.findByIdAndDelete(id);
+    
+  del.exec(function (err){
+    if(err) throw err;
+    res.redirect("/adminhome/books");  
+     
+  })
+});
+
+
+// AUTHOR
 
     //Router for Authors
     adminRouter.get('/authors',function(req,res){

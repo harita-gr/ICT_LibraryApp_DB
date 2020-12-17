@@ -34,7 +34,7 @@ function router(nav,title){
         nav,
         title: 'Authors',
         authors,
-        admin:true
+        admin:false
         } );
     })
     .catch();
@@ -50,7 +50,7 @@ function router(nav,title){
          nav,
          title: 'Authors',
          author,
-         admin:true
+         admin:false
      });
   
     })
