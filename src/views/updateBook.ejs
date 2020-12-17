@@ -82,7 +82,7 @@
           
           <div class="form-body">
             <h1> Update Book</h1> <br>
-            <form method="post"  action="/adminhome/updateB/<%=book._id%>" onsubmit="return formValidate()" >
+            <form method="post"  action="/adminhome/updateB/<%=book._id%>" onsubmit="return formValidate()" enctype="multipart/form-data" >
             <label> Book Title: </label><br>
             <input type="text" id="title" value="<%=book.title%>" class="form-control" name="title">
             <span id="atitle_err"></span><br>

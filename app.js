@@ -1,8 +1,8 @@
 //MAIN SERVER
 
 const express = require('express');
-//const multer = require('multer');
-// var upload = multer({dest:'./public/uploads'});
+const multer = require('multer');
+const path = require('path');
 
 // const GridFsStorage = require("multer-gridfs-storage");
 const app = express();
@@ -43,21 +43,16 @@ const authorRouter = require('./src/routes/authorRoutes') (user_nav,title);
 const adminRouter = require('./src/routes/adminRoutes') (admin_nav,title);
 // we can't use require for ejs
 
-// //Set storage engine - MULTER
+var Storage = multer.diskStorage({
+    destination:"./public/images",
+    filename:(req,file,cb) =>{
+        cb(null,file.fieldname+"_"+Date.now()+path.extname(file.originalname));
+    }
+});
 
-// const storage = multer.diskStorage({
-//     destination: "./public/uploads",
-//     filename:function(req,file,cb){
-//         cb(null,file.fieldname + '-' + Date.now()+path.extname(file.originalname));
-//     }
-// });
-
-
-// //initialize upload variable
-// const upload = multer({
-//     storage:storage
-// }).single('image');
-
+var upload = multer({
+    storage:Storage
+}).single('image');
 
 app.use(express.urlencoded({extended:true})); //for POST requests
 app.use(express.static('./public'));
@@ -68,6 +63,7 @@ app.use('/',validateRouter); // Index,SignIn,SignUp,Logout pages
 app.use('/books',booksRouter);
 app.use('/authors',authorRouter);
 app.use('/adminhome',adminRouter);
+
 
 //HOME
 app.post('/home',function(req,res){

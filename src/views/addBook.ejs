@@ -81,7 +81,7 @@
           <!--/stories-->
           <div class="form-body">
            <h1> Add New Book</h1> <br>
-           <form method="get" action="/adminhome/addB" onsubmit="return formValidate()" >
+           <form method="post" action="/adminhome/addB" onsubmit="return formValidate()" enctype="multipart/form-data" >
            <label> Book Title: </label><br>
            <input type="text" id="title" placeholder="Enter author name.." class="form-control" name="title">
            <span id="atitle_err"></span><br>

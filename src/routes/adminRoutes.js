@@ -1,25 +1,24 @@
 const express = require('express');
 const multer = require('multer');
-// var upload = multer({dest:'./public/uploads'});
+const path = require('path');
+
 
 const adminRouter = express.Router();
 const Bookdata = require('../model/BookData');
 const Authordata = require('../model/AuthorData');
 
-//Set storage engine - MULTER
-
-const storage = multer.diskStorage({
-  destination: "./public/uploads",
-  filename: function (req, file, cb) {
-    cb(null , file.originalname);
-}
+//Storage engine
+var Storage = multer.diskStorage({
+  destination:"./public/images/",
+  filename: function(req,file,cb){
+     // cb(null,file.fieldname+"_"+Date.now()+path.extname(file.originalname));
+     cb(null,file.originalname+path.extname(file.originalname));
+  }
 });
-
-// //initialize upload variable
-var upload = multer({ storage: storage })
-// const upload = multer({
-//   storage:storage
-// }).single('image');
+//Upload variable
+var upload = multer({
+  storage:Storage //use storage engine for storage
+}).single('image');
 
 
 //write called function
@@ -88,15 +87,28 @@ function router(nav,title){
     });
 
 // Add Book Action    
-    adminRouter.get('/addB',function(req,res){
+    adminRouter.post('/addB',upload,function(req,res){
+
       var item = {
-         title: req.query.title,
-         author: req.query.author,
-         genre: req.query.genre,
-         image: req.query.image
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        image: req.file.filename
+       }
+
+      upload(req, res, function (error) {
+        if (error) {
+          console.log(`upload.single error: ${error}`);
+          return res.sendStatus(500);
         }
+        console.log("success upload");
+      });
+
+    
+      
         var book = Bookdata(item);
-        book.save(); //save to DB
+        book.save(); //save to DB    
+
         res.redirect('/adminhome/books');
       });
 // Update Book Form
@@ -115,15 +127,22 @@ adminRouter.get('/updateBook/:i',function(req,res){
 });
 
 // Update Book Action
-adminRouter.post('/updateB/:i',function(req,res){
+adminRouter.post('/updateB/:i',upload,function(req,res){
   console.log('UPDATING',req.body);
   const id = req.params.i;
   var update = Bookdata.findByIdAndUpdate(id,{
        title:req.body.title,
        genre:req.body.genre,
-       image: req.body.image,
+       image: req.file.filename,
        author: req.body.author
   });
+  upload(req, res, function (error) {
+    if (error) {
+      console.log(`upload.single error: ${error}`);
+      return res.sendStatus(500);
+    }
+    console.log("success upload");
+  }); 
   update.exec(function (err,data){
     if(err) throw err;
     res.redirect("/adminhome/books");
@@ -196,13 +215,21 @@ adminRouter.get('/authors/:i',function(req,res){
       }   
     );
 
-    adminRouter.get('/addA',upload.single('image'),function(req,res){
+    adminRouter.post('/addA',upload,function(req,res){
       var item = {
-         name: req.query.name,
-         genre: req.query.genre,
-         books: req.query.books,
-         image: req.query.image
+         name: req.body.name,
+         genre: req.body.genre,
+         books: req.body.books,
+         image: req.file.filename
         }
+       upload(req, res, function (error) {
+        if (error) {
+          console.log(`upload.single error: ${error}`);
+          return res.sendStatus(500);
+        }
+        console.log("success upload");
+      }); 
+
         console.log('Files Uploaded: ');
         var author = Authordata(item);
         author.save(); //save to DB
@@ -227,15 +254,24 @@ adminRouter.get('/updateAuthor/:i',function(req,res){
   });
 });
 
-adminRouter.post('/updateA/:i',function(req,res){
+adminRouter.post('/updateA/:i',upload,function(req,res){
   console.log('UPDATING',req.body);
   const id = req.params.i;
   var update = Authordata.findByIdAndUpdate(id,{
        name:req.body.name,
        genre:req.body.genre,
-       image: req.body.image,
+       image: req.file.filename,
        books: req.body.books
   });
+ 
+  upload(req, res, function (error) {
+    if (error) {
+      console.log(`upload.single error: ${error}`);
+      return res.sendStatus(500);
+    }
+    console.log("success upload");
+  });
+
   update.exec(function (err,data){
     if(err) throw err;
     res.redirect("/adminhome/authors");
