@@ -6,13 +6,13 @@
 		<title><%=title%></title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
+		<link href="/css/styles.css" rel="stylesheet">
 	</head>
 	<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
@@ -82,19 +82,18 @@
           
            <div class="form-body">
             <h1> Add New Author</h1> <br>
-            <form method="get" action="/authors" onsubmit="return formValidate()" >
-
+            <form method="get" action="/adminhome/addA" onsubmit="return formValidate()" enctype="multipart/form-data">
            <label> Name: </label><br>
-           <input type="text" id="name" placeholder="Enter author name.." class="form-control">
+           <input type="text" id="name" placeholder="Enter author name.." class="form-control" name="name"> 
            <span id="aname_err"></span><br>
            <label> Genre: </label><br>
-           <input type="text" id="genre" placeholder="Enter the genre.." class="form-control">
+           <input type="text" id="genre" placeholder="Enter the genre.." class="form-control" name="genre">
            <span id="agenre_err"></span><br>
            <label> Books: </label><br>
-           <input type="text" id="books" placeholder="Enter books seperated by ','" class="form-control">
+           <input type="text" id="books" placeholder="Enter books seperated by ','" class="form-control" name="books">
            <span id="abook_err"></span><br>
            <label> Upload Image: </label><br>
-           <input type="file" id="file">
+           <input type="file" id="file" name="image">
            <span id="aimg_err"></span><br> <br>
            <input type="submit" value="Add Author" class="btn btn-dark"> 
           </form>

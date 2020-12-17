@@ -1,50 +1,61 @@
 const express = require('express');
 const authorRouter = express.Router();
+const Authordata = require('../model/AuthorData');
 //write called function
 function router(nav,title){
 
-var authors = [
-    {
-        author: "J.R.R. Tolkien",
-        genre: "Fantasy",
-        books: ["The Lord of the Rings","The Hobbits"],
-        img: "tolkien.jpeg"
-    },
-    {
-        author: "J.K Rowling",
-        genre: "Fantasy",
-        books: ["Harry Potter","Fantastic Beasts and Where to Find them"],
-        img: "jk.jpeg"
-    },
-    {
-        author: "James Clear",
-        genre: "Self-Help",
-        books: ["Atomic Habits"],
-        img: "clear.jpeg"
-    }
-    ]
+// var authors = [
+//     {
+//         author: "J.R.R. Tolkien",
+//         genre: "Fantasy",
+//         books: ["The Lord of the Rings","The Hobbits"],
+//         img: "tolkien.jpeg"
+//     },
+//     {
+//         author: "J.K Rowling",
+//         genre: "Fantasy",
+//         books: ["Harry Potter","Fantastic Beasts and Where to Find them"],
+//         img: "jk.jpeg"
+//     },
+//     {
+//         author: "James Clear",
+//         genre: "Self-Help",
+//         books: ["Atomic Habits"],
+//         img: "clear.jpeg"
+//     }
+//     ]
 
-//Router for Authors
-authorRouter.get('/',function(req,res){
+   //Router for Authors
+   authorRouter.get('/authors',function(req,res){
+    Authordata.find() //catch the values
+    .then(function(authors){
     res.render("authors",
-    {
-       nav,
-       title: 'Authors',
-       authors
-   } 
-    );
-});
-
-// for single author page
-authorRouter.get('/:i',function(req,res){
-   const id = req.params.i;
-   res.render('author',{
-       nav,
-       title: 'Author',
-       author: authors[id]
-   })
-});
-
+        {
+        nav,
+        title: 'Authors',
+        authors,
+        admin:true
+        } );
+    })
+    .catch();
+  });
+  
+  // for single author page
+  authorRouter.get('/authors/:i',function(req,res){
+    const id = req.params.i;
+    Authordata.findOne({_id:id})
+    .then(function(author){
+  
+     res.render('author',{
+         nav,
+         title: 'Authors',
+         author,
+         admin:true
+     });
+  
+    })
+    .catch();
+  });
      return authorRouter;
 }
 //acts as calling function as well

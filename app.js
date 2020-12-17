@@ -1,6 +1,10 @@
 //MAIN SERVER
 
 const express = require('express');
+//const multer = require('multer');
+// var upload = multer({dest:'./public/uploads'});
+
+// const GridFsStorage = require("multer-gridfs-storage");
 const app = express();
 const port = process.env.PORT || 2000;
 
@@ -12,12 +16,19 @@ const index_nav =[
     {link:'/userRegister',name:'Sign Up'}
 ];
 
-const nav = [
+const admin_nav =[
+    {link:'/adminhome',name:'Home'},
+    {link:'/adminhome/books',name:'Books'},
+    {link:'/adminhome/authors',name:'Authors'},
+    {link:'/adminhome/addBook',name:'Add Book'},
+    {link:'/adminhome/addAuthor',name:'Add Author'},
+    {link:'/logout',name:'Logout'}
+];
+
+const user_nav = [
     {link:'/home',name:'Home'},
     {link:'/books',name:'Books'},
     {link:'/authors',name:'Authors'},
-    {link:'/addBook',name:'Add Book'},
-    {link:'/addAuthor',name:'Add Author'},
     {link:'/logout',name:'Logout'}
 ];
 
@@ -27,12 +38,28 @@ const title = "Good Reads Library"
 //File Seperation
 
 const validateRouter = require('./src/routes/validateRoutes') (index_nav,title);
-const booksRouter = require('./src/routes/bookRoutes') (nav,title); //passing nav array to bookroutes.js
-const authorRouter = require('./src/routes/authorRoutes') (nav,title);
-const addAuthorRouter = require('./src/routes/addAuthorRoutes') (nav,title);
-const addBookRouter = require('./src/routes/addBookRoutes') (nav,title)
+const booksRouter = require('./src/routes/bookRoutes') (user_nav,title); //passing nav array to bookroutes.js
+const authorRouter = require('./src/routes/authorRoutes') (user_nav,title);
+const adminRouter = require('./src/routes/adminRoutes') (admin_nav,title);
 // we can't use require for ejs
 
+// //Set storage engine - MULTER
+
+// const storage = multer.diskStorage({
+//     destination: "./public/uploads",
+//     filename:function(req,file,cb){
+//         cb(null,file.fieldname + '-' + Date.now()+path.extname(file.originalname));
+//     }
+// });
+
+
+// //initialize upload variable
+// const upload = multer({
+//     storage:storage
+// }).single('image');
+
+
+app.use(express.urlencoded({extended:true})); //for POST requests
 app.use(express.static('./public'));
 app.set('view engine','ejs'); //set view engine
 app.set('views','./src/views'); //set ejs path
@@ -40,11 +67,11 @@ app.set('views','./src/views'); //set ejs path
 app.use('/',validateRouter); // Index,SignIn,SignUp,Logout pages
 app.use('/books',booksRouter);
 app.use('/authors',authorRouter);
-app.use('/addAuthor',addAuthorRouter);
-app.use('/addBook',addBookRouter);
+app.use('/adminhome',adminRouter);
 
 //HOME
 app.post('/home',function(req,res){
+    const nav = user_nav;
     res.render("home",
       {
           nav,
@@ -54,6 +81,7 @@ app.post('/home',function(req,res){
 });
 
 app.get('/home',function(req,res){
+    const nav = user_nav;
     res.render("home",
       {
           nav,
@@ -61,6 +89,7 @@ app.get('/home',function(req,res){
       }   
     );
 });
+
 
 
 app.listen(port,()=> {console.log("Server Ready at "+port)});

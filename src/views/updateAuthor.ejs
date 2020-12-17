@@ -7,7 +7,8 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -23,7 +24,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
- 
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -51,17 +51,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Books
+        <h1>Authors
           <p class="lead"></p>
         </h1>
       </div>
-  
+   
     </div> 
   </div><!-- /cont -->
   
   <div class="container">
     <div class="row">
-
+    
     </div> 
   </div><!-- /cont -->
   
@@ -79,25 +79,27 @@
           
           
           <!--/stories-->
-          <div class="form-body">
-           <h1> Add New Book</h1> <br>
-           <form method="get" action="/adminhome/addB" onsubmit="return formValidate()" >
-           <label> Book Title: </label><br>
-           <input type="text" id="title" placeholder="Enter author name.." class="form-control" name="title">
-           <span id="atitle_err"></span><br>
-           <label> Author Name: </label><br>
-           <input type="text" id="name" placeholder="Enter author name.." class="form-control" name="author">
+          
+           <div class="form-body">
+            <h1> Update Author</h1> <br>
+            <form method="post" action="/adminhome/updateA/<%=author._id%>" onsubmit="return formValidate()" >
+
+           <label> Name: </label><br>
+           <input type="text" id="name" value="<%=author.name%>" class="form-control" name="name"> 
            <span id="aname_err"></span><br>
            <label> Genre: </label><br>
-           <input type="text" id="genre" placeholder="Enter the genre.." class="form-control" name="genre">
+           <input type="text" id="genre" value="<%=author.genre%>" class="form-control" name="genre">
            <span id="agenre_err"></span><br>
-           <label> Upload Image: </label><br>
-           <input type="file" id="file" name="image">
-           <span id="aimg_err"></span><br><br>
-           <input type="submit" value="Add Book" class="btn btn-dark">
+           <label> Books: </label><br>
+           <input type="text" id="books" value="<%=author.books%>" class="form-control" name="books">
+           <span id="abook_err"></span><br>
+           <label> Change Image: </label><br>
+           <input type="file" id="file" name="image"> <br>
+           <img src="/images/<%=author.image%>" style="width:100px;height: 100px;" >
+           <span id="aimg_err"></span><br> <br>
+           <input type="submit" value="Update Author" class="btn btn-dark"> 
           </form>
-        </div>  
-          
+        </div>      
           <!--/stories-->        
           
         </div>
@@ -159,8 +161,8 @@
        let nameerr=document.getElementById("aname_err");
        let genre=document.getElementById("genre");
        let gerr=document.getElementById("agenre_err");
-       let title=document.getElementById("title");
-       let titleerr=document.getElementById("atitle_err");
+       let book=document.getElementById("books");
+       let bookerr=document.getElementById("abook_err");
        let img=document.getElementById("file");
        let imgerr=document.getElementById("aimg_err");
 
@@ -176,8 +178,8 @@
          flag=0;
        }
 
-       if (title.value.trim() ===""){
-        titleerr.innerHTML=" **Field cannot be empty";
+       if (book.value.trim() ===""){
+        bookerr.innerHTML=" **Field cannot be empty";
          flag=0;
        }
 
@@ -188,7 +190,7 @@
 
        if(flag==1)
        {
-        alert("Successfully added Book!!");
+        alert("Successfully added Author!!");
          return true;
        }
        else {       
@@ -196,5 +198,6 @@
       }
     }
    </script>
+    
 	</body>
 </html>

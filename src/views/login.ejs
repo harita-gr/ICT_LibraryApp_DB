@@ -72,9 +72,12 @@
 
 <div class="container">
   <div class="row">
-    
+    <% if(error != "") { %>
     <div class="col-md-12"> 
-      
+      <div class="alert alert-danger" role="alert">    
+        <strong> <%=error%> </strong>
+      </div>
+     <% }  %>
       <div class="panel-form">
         <div class="panel-body">
                    
@@ -82,18 +85,20 @@
 
           <div class="form-body">
             <h1> Welcome Back!</h1> <br>
-              <form method="post" action="/home" onsubmit="return formValidate()" >
+              <form method="post" action="/signinValidate" onsubmit="return formValidate()" >
 
                   
                   <label> Email:</label><br>
-                  <input type="email" id="email" placeholder="Enter your email ID.." class="form-control"> 
+                  <input type="email" id="email" placeholder="Enter your email ID.." class="form-control" name="email"> 
                    <span id="err_email"></span> <br>
                   <label> Password:</label><br>
-                  <input type="password" id="password" placeholder="Enter your password.." required class="form-control">
+                  <input type="password" id="password" placeholder="Enter your password.." required class="form-control" name="password">
                   <span id="err_pass"></span> <br><br>
                   <input type="submit" value="SIGN IN" class="btn btn-dark">
                 <hr>
               <small> New User? Sign Up <a href="/userRegister">here</a>! </small>
+              <hr>
+              <small>  <a href="/adminlogin">Sign In as Admin</a> </small>
             </form>
           </div>
           

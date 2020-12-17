@@ -84,10 +84,10 @@
           <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-title" href="#"><img alt="" src="/images/<%=author.img%>" style="width:100px;height:100px" class="img-circle"></a>
+              <a class="story-title" href="#"><img alt="" src="/images/<%=author.image%>" style="width:100px;height:100px" class="img-circle"></a>
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><%=author.author %></h3>
+              <h3><%=author.name %></h3>
               <div class="row">
                 <div class="col-xs-9">
                   <h4><span class="label label-default"><%=author.genre %></span></h4><h4>
@@ -95,10 +95,7 @@
                   </h4></div><br>
                   <h3> &nbsp &nbsp Books:</h3>
                 <div class="col-xs-6">
-                  <%for(i=0;i<author.books.length;i++) {%>
-                    
-                    •<%=author.books[i] %>   <br>
-                 <%} %>
+                 <%=author.books %>
                 </div>
               </div>
               <br><br>
@@ -110,7 +107,7 @@
           <!--/stories-->
           
           
-          <a href="/authors" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>        
+          <a href="/adminhome/authors" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>        
           
         </div>
       </div>

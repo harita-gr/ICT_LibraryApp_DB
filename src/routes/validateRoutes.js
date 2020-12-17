@@ -1,5 +1,11 @@
 const express = require('express');
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const passportLocalMongoose =   require("passport-local-mongoose");
+
 const validateRouter = express.Router();
+const Userdata = require('../model/UserData');
+
 //write called function
 function router(nav,title){
 
@@ -52,11 +58,47 @@ validateRouter.get('/userlogin',function(req,res){
     res.render("login",
       {
           nav,
-          title
+          title,
+          error : ""
       }   
     );
 });
 
+//LOGIN VALIDATE PAGE
+
+validateRouter.post('/signinValidate',function(req,res){
+  
+    let email =req.body.email;
+    let password =req.body.password;   
+
+   Userdata.findOne({email:email})
+   .then(function(user){
+         if(user.password == password)
+         {
+          res.redirect('/home');
+           }
+
+         else{
+              res.render("login",
+              {
+                  nav,
+                  title,
+                  error : "Invalid Credentials! Please Try again!"
+              }   
+              );
+            }
+    })
+   .catch( ()=> {
+
+         res.render("login",
+              {
+                  nav,
+                  title,
+                  error : "User not found! Please SIGN UP!"
+              }   
+              );    
+            });
+  });
 
 //REGISTER
 validateRouter.get('/userRegister',function(req,res){
@@ -66,6 +108,54 @@ validateRouter.get('/userRegister',function(req,res){
           title
       }   
     );
+});
+
+//REGISTER VALIDATE PAGE
+
+validateRouter.post('/loginValidate',function(req,res){
+  
+  var user = {
+    name: req.body.fn,
+    email: req.body.email,
+    dob: req.body.dob,
+    // image: req.query.image,
+    password: req.body.password,
+   }
+   var user = Userdata(user);
+   user.save(); //save to DB
+   res.redirect('/home');
+ });
+
+//ADMIN LOGIN
+validateRouter.get('/adminlogin',function(req,res){
+  res.render("adminLogin",
+    {
+        nav,
+        title,
+        error : ""
+    }   
+  );
+});
+
+//ADMIN LOGIN VALIDATE
+validateRouter.post('/adminValidate',function(req,res){
+  
+  let email =req.body.email;
+  let password =req.body.password;   
+
+  if (email == "admin" && password=="admin"){
+    res.redirect('/adminhome');
+  }
+  else {
+
+    res.render("adminLogin",
+    {
+        nav,
+        title,
+        error : "Invalid Credentials! Please Try again!"
+    }   
+    );    
+  }
 });
 
 //LOGOUT

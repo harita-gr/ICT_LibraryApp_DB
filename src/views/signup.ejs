@@ -82,18 +82,18 @@
 
           <div class="form-body">
             <h1> Register with Us!</h1> <br>
-            <form method="post" action="/home" onsubmit="return formValidate()" >
+            <form method="post" action="/loginValidate" onsubmit="return formValidate()" >
                
                 <label> Full Name:</label> <br>
-                <input type="text" id="fn" placeholder="Enter your full name.." class="form-control">
+                <input type="text" id="fn" placeholder="Enter your full name.." class="form-control" name="fn">
                 <span id="err_fn"></span> <br>
                 <label> Email:</label><br>
-                <input type="email" id="email" placeholder="Enter your email ID.." class="form-control" > 
+                <input type="email" id="email" placeholder="Enter your email ID.." class="form-control" name="email" > 
                 <span id="err_email"></span> <br>
                 <label> Date of Birth:</label><br>
-                <input type="date" required> <br> <br>
+                <input type="date" required name="date"> <br> <br>
                 <label> Password:</label><br>
-                <input type="password" id="password" placeholder="Enter your password.." class="form-control">
+                <input type="password" id="password" placeholder="Enter your password.." class="form-control" name="password">
                 <span id="err_pass"></span> <br>
                 <label> Confirm Password:</label><br>
                 <input type="password" id="password2" placeholder="Confirm your password.." class="form-control">
@@ -102,6 +102,8 @@
             
               <hr>
             <small> Already having Account? Sign In <a href="/userLogin">here</a>! </small>
+            <hr>
+            <small>  <a href="/adminlogin">Sign In as Admin</a> </small>
           </form>
         </div>
           
