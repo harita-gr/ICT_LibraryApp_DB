@@ -26,7 +26,7 @@ function router(nav,title){
 //     ]
 
    //Router for Authors
-   authorRouter.get('/authors',function(req,res){
+   authorRouter.get('/',function(req,res){
     Authordata.find() //catch the values
     .then(function(authors){
     res.render("authors",
@@ -41,7 +41,7 @@ function router(nav,title){
   });
   
   // for single author page
-  authorRouter.get('/authors/:i',function(req,res){
+  authorRouter.get('/:i',function(req,res){
     const id = req.params.i;
     Authordata.findOne({_id:id})
     .then(function(author){

@@ -126,14 +126,15 @@ adminRouter.post('/updateB/:i',function(req,res){
   });
   update.exec(function (err,data){
     if(err) throw err;
-    res.render("books",
-    {
-        nav,
-        title
-        // success : "Record Updated Successfully!",
+    res.redirect("/adminhome/books");
+    // res.render("books",
+    // {
+    //     nav,
+    //     title
+    //     // success : "Record Updated Successfully!",
         
-    }   
-    );    
+    // }   
+    // );    
   })
 });
 
@@ -237,14 +238,15 @@ adminRouter.post('/updateA/:i',function(req,res){
   });
   update.exec(function (err,data){
     if(err) throw err;
-    res.render("authors",
-    {
-        nav,
-        title
-        // success : "Record Updated Successfully!",
+    res.redirect("/adminhome/authors");
+    // res.render("authors",
+    // {
+    //     nav,
+    //     title
+    //     // success : "Record Updated Successfully!",
         
-    }   
-    );    
+    // }   
+    // );    
   })
 });
 

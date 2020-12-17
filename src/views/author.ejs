@@ -106,8 +106,14 @@
           
           <!--/stories-->
           
-          
-          <a href="/adminhome/authors" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>        
+                 
+          <%  if(admin) {%>
+            <a href="/adminhome/authors" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>  
+            <% } 
+             else{ %>
+              <a href="/authors" class="btn btn-primary pull-right btnNext"> <i class="glyphicon glyphicon-chevron-left"> Back</i></a>
+            <% } %>
+                
           
         </div>
       </div>

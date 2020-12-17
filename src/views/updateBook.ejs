@@ -154,49 +154,49 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
-      function formValidate(){
-
-       let name=document.getElementById("name");
-       let nameerr=document.getElementById("aname_err");
-       let genre=document.getElementById("genre");
-       let gerr=document.getElementById("agenre_err");
-       let book=document.getElementById("books");
-       let bookerr=document.getElementById("abook_err");
-       let img=document.getElementById("file");
-       let imgerr=document.getElementById("aimg_err");
-
-       let flag=1;
-
-       if (name.value.trim() ===""){
-        nameerr.innerHTML=" **Field cannot be empty";
-         flag=0;
-       }
-
-       if (genre.value.trim() ===""){
-        gerr.innerHTML=" **Field cannot be empty";
-         flag=0;
-       }
-
-       if (book.value.trim() ===""){
-        bookerr.innerHTML=" **Field cannot be empty";
-         flag=0;
-       }
-
-       if(img.value === ""){
-        imgerr.innerHTML=" Please upload image";
-        flag=0;
-       }
-
-       if(flag==1)
-       {
-        alert("Successfully added Author!!");
-         return true;
-       }
-       else {       
-         return false;
+        function formValidate(){
+  
+         let name=document.getElementById("name");
+         let nameerr=document.getElementById("aname_err");
+         let genre=document.getElementById("genre");
+         let gerr=document.getElementById("agenre_err");
+         let title=document.getElementById("title");
+         let titleerr=document.getElementById("atitle_err");
+         let img=document.getElementById("file");
+         let imgerr=document.getElementById("aimg_err");
+  
+         let flag=1;
+  
+         if (name.value.trim() ===""){
+          nameerr.innerHTML=" **Field cannot be empty";
+           flag=0;
+         }
+  
+         if (genre.value.trim() ===""){
+          gerr.innerHTML=" **Field cannot be empty";
+           flag=0;
+         }
+  
+         if (title.value.trim() ===""){
+          titleerr.innerHTML=" **Field cannot be empty";
+           flag=0;
+         }
+  
+         if(img.value === ""){
+          imgerr.innerHTML=" Please upload image";
+          flag=0;
+         }
+  
+         if(flag==1)
+         {
+          alert("Successfully Updated Book!!");
+           return true;
+         }
+         else {       
+           return false;
+        }
       }
-    }
-   </script>
+     </script>
     
 	</body>
 </html>
